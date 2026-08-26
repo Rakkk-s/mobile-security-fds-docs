@@ -93,7 +93,7 @@
 
     위협 유형 분석, 공격 시나리오 설계, 탐지 데이터 분석, FDS 룰 설계
 
-    [:fontawesome-brands-github:](#)
+    [:fontawesome-brands-github:](https://github.com/koreaman159-alt)
     &nbsp;
     [:fontawesome-brands-linkedin:](#)
     &nbsp;
@@ -105,7 +105,7 @@
 
     위협 유형 분석, 공격 시나리오 설계, 탐지 데이터 분석, FDS 룰 설계
 
-    [:fontawesome-brands-github:](#)
+    [:fontawesome-brands-github:](https://github.com/zuyeon99)
     &nbsp;
     [:fontawesome-brands-linkedin:](#)
     &nbsp;
@@ -117,7 +117,7 @@
 
     위협 유형 분석, 공격 시나리오 설계, 탐지 데이터 분석, FDS 룰 설계
 
-    [:fontawesome-brands-github:](#)
+    [:fontawesome-brands-github:](https://github.com/kim-subsub)
     &nbsp;
     [:fontawesome-brands-linkedin:](#)
     &nbsp;
