@@ -1,0 +1,122 @@
+site_name: 금융권 모바일 보안 위협 분석 및 대응 시스템 설계
+site_description: 시큐리티 아카데미 8기 안랩 트랙 · TEAM Rak's 프로젝트 문서
+site_url: https://rakkk-s.github.io/mobile-fds-architecture-docs/
+
+repo_url: https://github.com/Rakkk-s/mobile-fds-architecture-docs
+repo_name: Rakkk-s/mobile-fds-architecture-docs
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: ko
+  # logo: assets/logo.png
+  # favicon: assets/logo.png
+  font:
+    text: Noto Sans KR
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: 다크 모드로 전환
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: 라이트 모드로 전환
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.tooltips
+
+markdown_extensions:
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      title: 목차
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.mark
+  - admonition
+
+plugins:
+  - search:
+      lang: ko
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Rakkk-s/mobile-fds-architecture-docs
+      name: GitHub
+  generator: false
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Home: index.md
+  - 위협 유형 분석:
+      - "위협 분석 개요": 01-threat/overview.md
+      - "로더·드로퍼·다운로더형": 01-threat/type-01-loader.md
+      - "개인·단말정보 탈취형": 01-threat/type-02-deviceinfo.md
+      - "금융·인증정보 탈취형": 01-threat/type-03-credential.md
+      - "통화·문자 제어형": 01-threat/type-04-callcontrol.md
+      - "원격제어·화면감시형": 01-threat/type-05-remotecontrol.md
+  - 공격 시나리오:
+      - "시나리오 구성": 02-scenario/overview.md
+      - "카드사 부정결제 취소": 02-scenario/scenario-01-card-cancel.md
+      - "기관 사칭 전화 가로채기": 02-scenario/scenario-02-forcecall.md
+      - "대출 사칭 원격제어": 02-scenario/scenario-03-remotecontrol.md
+      - "NFC 릴레이 결제": 02-scenario/scenario-04-nfc-relay.md
+  - 탐지 데이터:
+      - "탐지 데이터 개요": 03-detection/overview.md
+      - "단말수집정보 (deviceInfo)": 03-detection/api-01-deviceinfo.md
+      - "악성코드 탐지정보 (antivirus)": 03-detection/api-02-antivirus.md
+      - "원격제어·루팅 탐지정보 (rootcheck)": 03-detection/api-03-rootcheck.md
+      - "단말위협정보 (mobileDeviceThreatInfo)": 03-detection/api-04-threatinfo.md
+      - "탐지 데이터 분포 분석": 03-detection/dataset-analysis.md
+      - "수집 한계와 대체 신호": 03-detection/limitations.md
+  - 보안 아키텍처:
+      - "모듈 연동 구조": 04-architecture/module-integration.md
+      - "데이터 흐름과 역할 분담": 04-architecture/data-flow.md
+  - FDS 룰 설계:
+      - "룰 설계 원칙": 05-fds-rule/principles.md
+      - "룰 정의서": 05-fds-rule/rule-catalog.md
+      - "시나리오 ↔ 룰 매핑": 05-fds-rule/scenario-mapping.md
+      - "룰 검증": 05-fds-rule/validation.md
+  - 부록:
+      - "용어 정리": 99-appendix/glossary.md
+      - "참고 자료": 99-appendix/references.md
