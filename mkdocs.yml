@@ -51,7 +51,6 @@ markdown_extensions:
   - tables
   - toc:
       title: 목차
-      permalink: true
   - pymdownx.highlight:
       anchor_linenums: true
       pygments_lang_class: true
