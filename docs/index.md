@@ -29,7 +29,7 @@
     보이스피싱, 스미싱, 큐싱, 악성 앱 등
     악성 앱이 단말에 유입되는 경로와 금전 피해까지의 공통 흐름을 정리했습니다.
 
-    [:octicons-arrow-right-24: 바로가기](./01-flow/overview.md)
+    [:octicons-arrow-right-24: 바로가기](./00-flow/overview.md)
 
 -   :material-bug-outline: **2단계 · 위협 유형 분석**
 
@@ -38,7 +38,7 @@
     로더, 정보 탈취, 전화 가로채기, 원격제어 등
     금융 악성 앱의 악성 행위를 유형별로 분류하고 국내 사례와 함께 분석했습니다.
 
-    [:octicons-arrow-right-24: 바로가기](./02-threat/overview.md)
+    [:octicons-arrow-right-24: 바로가기](./01-threat/overview.md)
 
 -   :material-sitemap: **3단계 · 공격 시나리오**
 
@@ -47,7 +47,7 @@
     분석한 위협 유형을 조합해
     실제 발생 가능한 공격을 단계별로 재구성했습니다.
 
-    [:octicons-arrow-right-24: 바로가기](./03-scenario/overview.md)
+    [:octicons-arrow-right-24: 바로가기](./02-scenario/overview.md)
 
 -   :material-database-search: **4단계 · 탐지 데이터**
 
@@ -56,7 +56,7 @@
     보안 모듈의 탐지 정보를 유형별로 정리하고,
     공격 시나리오별 탐지 가능 데이터와 활용 방안을 분석했습니다.
 
-    [:octicons-arrow-right-24: 바로가기](./04-detection/overview.md)
+    [:octicons-arrow-right-24: 바로가기](./03-detection/overview.md)
 
 -   :material-lan-connect: **5단계 · 보안 아키텍처**
 
@@ -65,7 +65,7 @@
     단말 · 보안 모듈 · 금융사 서버 · FDS로 이어지는
     연동 구조와 역할 분담을 설계했습니다.
 
-    [:octicons-arrow-right-24: 바로가기](./05-architecture/module-integration.md)
+    [:octicons-arrow-right-24: 바로가기](./04-architecture/module-integration.md)
 
 -   :material-shield-check: **6단계 · FDS 룰 설계**
 
@@ -74,7 +74,7 @@
     복수 탐지 데이터를 조합한 시나리오별 탐지 룰을 설계하고,
     실제 사고 사례에 대입해 검증했습니다.
 
-    [:octicons-arrow-right-24: 바로가기](./06-fds-rule/principles.md)
+    [:octicons-arrow-right-24: 바로가기](./05-fds-rule/principles.md)
 
 </div>
 
