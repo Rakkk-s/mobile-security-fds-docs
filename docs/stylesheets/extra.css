@@ -1,15 +1,15 @@
 /* TEAM Rak's — 문서 스타일 확장 */
 
 :root {
-  --md-primary-fg-color:        #6C5CE7;
+  --md-primary-fg-color: #6C5CE7;
   --md-primary-fg-color--light: #8C7DF0;
-  --md-primary-fg-color--dark:  #4A3DBF;
-  --md-accent-fg-color:         #6C5CE7;
+  --md-primary-fg-color--dark: #4A3DBF;
+  --md-accent-fg-color: #6C5CE7;
 }
 
 [data-md-color-scheme="slate"] {
   --md-primary-fg-color: #6C5CE7;
-  --md-accent-fg-color:  #8C7DF0;
+  --md-accent-fg-color: #8C7DF0;
 }
 
 /* 표 가독성 */
@@ -35,7 +35,7 @@
 }
 
 /* 코드 블록 안의 흐름도(→ 나열) 가독성 */
-.md-typeset pre > code {
+.md-typeset pre>code {
   line-height: 1.7;
 }
 
@@ -43,4 +43,21 @@
 .md-typeset .mermaid {
   margin: 1.5em 0;
   text-align: center;
+}
+
+/* 헤더 로고 — 가로형 워드마크라 기본 높이보다 조금 키움 */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.6rem;
+  width: auto;
+}
+
+.md-nav__title .md-nav__button.md-logo img {
+  height: 1.6rem;
+  width: auto;
+}
+
+/* 다크 모드에서 본문 로고가 묻히지 않도록 */
+[data-md-color-scheme="slate"] .md-typeset img[src$="logo.png"] {
+  filter: invert(1) hue-rotate(180deg);
 }

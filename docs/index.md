@@ -1,11 +1,9 @@
 # 시큐리티 아카데미 8기 · TEAM Rak's
 
-<!-- 로고 준비되면 아래 주석을 해제하세요
 <div align="center">
-  <img src="assets/logo.png" width="220">
+  <img src="assets/logo.png" width="260">
   <br>
 </div>
--->
 
 ---
 
