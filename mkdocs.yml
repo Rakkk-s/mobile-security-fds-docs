@@ -83,35 +83,41 @@ extra_css:
 
 nav:
   - Home: index.md
+  - 공격 흐름:
+      - "공격 흐름 개요": 01-flow/overview.md
+      - "보이스피싱": 01-flow/entry-01-voicephishing.md
+      - "스미싱": 01-flow/entry-02-smishing.md
+      - "큐싱": 01-flow/entry-03-qshing.md
+      - "악성 앱": 01-flow/entry-04-malapp.md
   - 위협 유형 분석:
-      - "위협 분석 개요": 01-threat/overview.md
-      - "로더·드로퍼·다운로더형": 01-threat/type-01-loader.md
-      - "개인·단말정보 탈취형": 01-threat/type-02-deviceinfo.md
-      - "금융·인증정보 탈취형": 01-threat/type-03-credential.md
-      - "통화·문자 제어형": 01-threat/type-04-callcontrol.md
-      - "원격제어·화면감시형": 01-threat/type-05-remotecontrol.md
+      - "위협 분석 개요": 02-threat/overview.md
+      - "로더·드로퍼·다운로더형": 02-threat/type-01-loader.md
+      - "개인·단말정보 탈취형": 02-threat/type-02-deviceinfo.md
+      - "금융·인증정보 탈취형": 02-threat/type-03-credential.md
+      - "통화·문자 제어형": 02-threat/type-04-callcontrol.md
+      - "원격제어·화면감시형": 02-threat/type-05-remotecontrol.md
   - 공격 시나리오:
-      - "시나리오 구성": 02-scenario/overview.md
-      - "카드사 부정결제 취소": 02-scenario/scenario-01-card-cancel.md
-      - "기관 사칭 전화 가로채기": 02-scenario/scenario-02-forcecall.md
-      - "대출 사칭 원격제어": 02-scenario/scenario-03-remotecontrol.md
-      - "NFC 릴레이 결제": 02-scenario/scenario-04-nfc-relay.md
+      - "시나리오 구성": 03-scenario/overview.md
+      - "카드사 부정결제 취소": 03-scenario/scenario-01-card-cancel.md
+      - "기관 사칭 전화 가로채기": 03-scenario/scenario-02-forcecall.md
+      - "대출 사칭 원격제어": 03-scenario/scenario-03-remotecontrol.md
+      - "NFC 릴레이 결제": 03-scenario/scenario-04-nfc-relay.md
   - 탐지 데이터:
-      - "탐지 데이터 개요": 03-detection/overview.md
-      - "단말수집정보 (deviceInfo)": 03-detection/api-01-deviceinfo.md
-      - "악성코드 탐지정보 (antivirus)": 03-detection/api-02-antivirus.md
-      - "원격제어·루팅 탐지정보 (rootcheck)": 03-detection/api-03-rootcheck.md
-      - "단말위협정보 (mobileDeviceThreatInfo)": 03-detection/api-04-threatinfo.md
-      - "탐지 데이터 분포 분석": 03-detection/dataset-analysis.md
-      - "수집 한계와 대체 신호": 03-detection/limitations.md
+      - "탐지 데이터 개요": 04-detection/overview.md
+      - "단말수집정보 (deviceInfo)": 04-detection/api-01-deviceinfo.md
+      - "악성코드 탐지정보 (antivirus)": 04-detection/api-02-antivirus.md
+      - "원격제어·루팅 탐지정보 (rootcheck)": 04-detection/api-03-rootcheck.md
+      - "단말위협정보 (mobileDeviceThreatInfo)": 04-detection/api-04-threatinfo.md
+      - "탐지 데이터 분포 분석": 04-detection/dataset-analysis.md
+      - "수집 한계와 대체 신호": 04-detection/limitations.md
   - 보안 아키텍처:
-      - "모듈 연동 구조": 04-architecture/module-integration.md
-      - "데이터 흐름과 역할 분담": 04-architecture/data-flow.md
+      - "모듈 연동 구조": 05-architecture/module-integration.md
+      - "데이터 흐름과 역할 분담": 05-architecture/data-flow.md
   - FDS 룰 설계:
-      - "룰 설계 원칙": 05-fds-rule/principles.md
-      - "룰 정의서": 05-fds-rule/rule-catalog.md
-      - "시나리오 ↔ 룰 매핑": 05-fds-rule/scenario-mapping.md
-      - "룰 검증": 05-fds-rule/validation.md
+      - "룰 설계 원칙": 06-fds-rule/principles.md
+      - "룰 정의서": 06-fds-rule/rule-catalog.md
+      - "시나리오 ↔ 룰 매핑": 06-fds-rule/scenario-mapping.md
+      - "룰 검증": 06-fds-rule/validation.md
   - 부록:
       - "용어 정리": 99-appendix/glossary.md
       - "참고 자료": 99-appendix/references.md
