@@ -1,4 +1,4 @@
-site_name: 금융권 모바일 보안 위협 분석 및 보안 모듈 연동 기반 대응 시스템 설계
+site_name: 금융권 모바일 보안 위협 분석 및 대응 시스템 설계
 site_description: 시큐리티 아카데미 8기 안랩 트랙 · TEAM Rak's 프로젝트 문서
 site_url: https://rakkk-s.github.io/mobile-security-fds-docs/
 
@@ -83,27 +83,24 @@ extra_css:
 
 nav:
   - Home: index.md
-  - 공격 흐름:
-      - "공격 흐름 개요": 00-flow/overview.md
+  - 주요 위협 분석:
       - "보이스피싱": 00-flow/entry-01-voicephishing.md
       - "스미싱": 00-flow/entry-02-smishing.md
       - "큐싱": 00-flow/entry-03-qshing.md
       - "악성 앱": 00-flow/entry-04-malapp.md
-  - 위협 유형 분석:
-      - "위협 분석 개요": 01-threat/overview.md
+      - "공격 흐름": 00-flow/overview.md
+  - 악성 앱 주요 행위:
       - "로더·드로퍼·다운로더형": 01-threat/type-01-loader.md
       - "개인·단말정보 탈취형": 01-threat/type-02-deviceinfo.md
       - "금융·인증정보 탈취형": 01-threat/type-03-credential.md
       - "통화·문자 제어형": 01-threat/type-04-callcontrol.md
       - "원격제어·화면감시형": 01-threat/type-05-remotecontrol.md
   - 공격 시나리오:
-      - "시나리오 구성": 02-scenario/overview.md
       - "카드사 부정결제 취소": 02-scenario/scenario-01-card-cancel.md
       - "기관 사칭 전화 가로채기": 02-scenario/scenario-02-forcecall.md
       - "대출 사칭 원격제어": 02-scenario/scenario-03-remotecontrol.md
       - "NFC 릴레이 결제": 02-scenario/scenario-04-nfc-relay.md
   - 탐지 데이터:
-      - "탐지 데이터 개요": 03-detection/overview.md
       - "단말수집정보 (deviceInfo)": 03-detection/api-01-deviceinfo.md
       - "악성코드 탐지정보 (antivirus)": 03-detection/api-02-antivirus.md
       - "원격제어·루팅 탐지정보 (rootcheck)": 03-detection/api-03-rootcheck.md

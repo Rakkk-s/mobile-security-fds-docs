@@ -20,23 +20,23 @@
 
 <div class="grid cards" markdown>
 
--   :material-transit-connection-variant: **1단계 · 공격 흐름**
+-   :material-transit-connection-variant: **1단계 · 주요 위협 분석**
 
     ---
 
     보이스피싱, 스미싱, 큐싱, 악성 앱 등
-    악성 앱이 단말에 유입되는 경로와 금전 피해까지의 공통 흐름을 정리했습니다.
+    금융권에서 관측되는 주요 위협과 금전 피해까지의 공통 공격 흐름을 정리했습니다.
 
-    [:octicons-arrow-right-24: 바로가기](./00-flow/overview.md)
+    [:octicons-arrow-right-24: 바로가기](./00-flow/entry-01-voicephishing.md)
 
--   :material-bug-outline: **2단계 · 위협 유형 분석**
+-   :material-bug-outline: **2단계 · 악성 앱 주요 행위**
 
     ---
 
     로더, 정보 탈취, 전화 가로채기, 원격제어 등
-    금융 악성 앱의 악성 행위를 유형별로 분류하고 국내 사례와 함께 분석했습니다.
+    금융 악성 앱이 수행하는 주요 행위를 유형별로 분류하고 국내 사례와 함께 분석했습니다.
 
-    [:octicons-arrow-right-24: 바로가기](./01-threat/overview.md)
+    [:octicons-arrow-right-24: 바로가기](./01-threat/type-01-loader.md)
 
 -   :material-sitemap: **3단계 · 공격 시나리오**
 
@@ -45,7 +45,7 @@
     분석한 위협 유형을 조합해
     실제 발생 가능한 공격을 단계별로 재구성했습니다.
 
-    [:octicons-arrow-right-24: 바로가기](./02-scenario/overview.md)
+    [:octicons-arrow-right-24: 바로가기](./02-scenario/scenario-01-card-cancel.md)
 
 -   :material-database-search: **4단계 · 탐지 데이터**
 
@@ -54,7 +54,7 @@
     보안 모듈의 탐지 정보를 유형별로 정리하고,
     공격 시나리오별 탐지 가능 데이터와 활용 방안을 분석했습니다.
 
-    [:octicons-arrow-right-24: 바로가기](./03-detection/overview.md)
+    [:octicons-arrow-right-24: 바로가기](./03-detection/api-01-deviceinfo.md)
 
 -   :material-lan-connect: **5단계 · 보안 아키텍처**
 
