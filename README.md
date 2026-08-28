@@ -2,7 +2,7 @@
 
 # 금융권 모바일 보안 위협 분석 및 대응 시스템 설계
 
-**시큐리티 아카데미 8기 · 안랩 트랙 · TEAM Rak's**
+**시큐리티 아카데미 8기 · TEAM Rak's**
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-배포됨-brightgreen?style=flat-square&logo=github)](https://rakkk-s.github.io/mobile-security-fds-docs/)
 [![MkDocs](https://img.shields.io/badge/MkDocs-Material-blue?style=flat-square&logo=materialformkdocs)](https://squidfunk.github.io/mkdocs-material/)
