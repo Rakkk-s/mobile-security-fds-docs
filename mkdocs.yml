@@ -110,6 +110,3 @@ nav:
       - "룰 정의서": 05-fds-rule/rule-catalog.md
       - "시나리오 ↔ 룰 매핑": 05-fds-rule/scenario-mapping.md
       - "룰 검증": 05-fds-rule/validation.md
-  - 부록:
-      - "용어 정리": 99-appendix/glossary.md
-      - "참고 자료": 99-appendix/references.md
