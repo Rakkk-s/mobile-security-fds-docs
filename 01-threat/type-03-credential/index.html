@@ -1,0 +1,2576 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="시큐리티 아카데미 8기 안랩 트랙 · TEAM Rak's 프로젝트 문서">
+      
+      
+      
+        <link rel="canonical" href="https://rakkk-s.github.io/mobile-security-fds-docs/01-threat/type-03-credential/">
+      
+      
+        <link rel="prev" href="../type-02-deviceinfo/">
+      
+      
+        <link rel="next" href="../type-04-callcontrol/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>금융·인증정보 탈취형 - 금융권 모바일 보안 위협 분석 및 대응 시스템 설계</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans KR";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="금융권 모바일 보안 위협 분석 및 대응 시스템 설계" class="md-header__button md-logo" aria-label="금융권 모바일 보안 위협 분석 및 대응 시스템 설계" data-md-component="logo">
+      
+  <img src="../../assets/logo-white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            금융권 모바일 보안 위협 분석 및 대응 시스템 설계
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              금융·인증정보 탈취형
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../00-flow/entry-01-voicephishing/" class="md-tabs__link">
+          
+  
+  
+  주요 위협 분석
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../type-01-loader/" class="md-tabs__link">
+          
+  
+  
+  금융 악성 행위 과정
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02-scenario/scenario-01-card-smishing/" class="md-tabs__link">
+          
+  
+  
+  공격 시나리오
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../04-architecture/module-integration/" class="md-tabs__link">
+          
+  
+  
+  보안 아키텍처
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../05-fds-rule/principles/" class="md-tabs__link">
+          
+  
+  
+  FDS 룰 설계
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="금융권 모바일 보안 위협 분석 및 대응 시스템 설계" class="md-nav__button md-logo" aria-label="금융권 모바일 보안 위협 분석 및 대응 시스템 설계" data-md-component="logo">
+      
+  <img src="../../assets/logo-white.png" alt="logo">
+
+    </a>
+    금융권 모바일 보안 위협 분석 및 대응 시스템 설계
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    주요 위협 분석
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    주요 위협 분석
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-flow/entry-01-voicephishing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    보이스피싱
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-flow/entry-02-smishing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스미싱
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-flow/entry-03-qshing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    큐싱
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-flow/entry-04-malapp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    악성 앱
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-flow/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    공격 흐름
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    금융 악성 행위 과정
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    금융 악성 행위 과정
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    악성 앱 설치 구조
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    악성 앱 설치 구조
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../type-01-loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    로더·드로퍼·다운로더형
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    주요 악성 기능
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    주요 악성 기능
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../type-02-deviceinfo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개인·단말정보 탈취형
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    금융·인증정보 탈취형
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    금융·인증정보 탈취형
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 개요
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 개요">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1-1. 무엇을 탈취하는가
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1-2. 다른 유형과 헷갈리는 지점
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 국내 확인 사례
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 국내 확인 사례">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1-202508" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2-1. 지원금 사칭 스미싱 앱 (이스트시큐리티, 2025.08)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2-kisa-202607" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2-2. 카드사 사칭 스미싱·피싱 (KISA, 2026.07)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 핵심 기능
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 핵심 기능">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-1. 가짜 입력 화면
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-2. 문자 인증번호 가로채기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-3. 잠금 인증정보와 금융거래 화면 탈취
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 전체 공격 흐름
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 실제 사례에서 확인된 구조
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 실제 사례에서 확인된 구조">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5-1-anatsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-1. Anatsa — 정식 마켓을 통과한 오버레이·키로깅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-2. 지원금 사칭 앱 — 문자 인증번호 가로채기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-3-blackecho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-3. BlackEcho — 가짜 잠금화면과 화면 녹화
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-4. 참고 · 해외에서 확인된 최신 형태
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 공격자가 이 정보를 탈취하는 이유
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 탐지 관점 정리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 탐지 관점 정리">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7-1. 봐야 할 흔적
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7-2. 이 유형이 특히 까다로운 이유
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7-3. 플랫폼에서 받을 수 있는 신호
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        참고 자료
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../type-04-callcontrol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    통화·문자 제어형
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../type-05-remotecontrol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    원격제어·화면감시형
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    공격 시나리오
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    공격 시나리오
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-scenario/scenario-01-card-smishing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    카드사 사칭 스미싱
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-scenario/scenario-02-qshing-dropper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    큐싱 기반 드로퍼
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-scenario/scenario-03-nfc-relay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NFC 릴레이 공격
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-scenario/scenario-04-loan-remotecontrol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    대출 사칭 원격제어
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    보안 아키텍처
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    보안 아키텍처
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-architecture/module-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    모듈 연동 구조
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FDS 룰 설계
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FDS 룰 설계
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-fds-rule/principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    룰 설계 원칙
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-fds-rule/rule-catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    룰 정의서
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-fds-rule/scenario-mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시나리오 ↔ 룰 매핑
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-fds-rule/validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    룰 검증
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 개요
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 개요">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1-1. 무엇을 탈취하는가
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1-2. 다른 유형과 헷갈리는 지점
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 국내 확인 사례
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 국내 확인 사례">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1-202508" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2-1. 지원금 사칭 스미싱 앱 (이스트시큐리티, 2025.08)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2-kisa-202607" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2-2. 카드사 사칭 스미싱·피싱 (KISA, 2026.07)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 핵심 기능
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 핵심 기능">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-1. 가짜 입력 화면
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-2. 문자 인증번호 가로채기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-3. 잠금 인증정보와 금융거래 화면 탈취
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 전체 공격 흐름
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 실제 사례에서 확인된 구조
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 실제 사례에서 확인된 구조">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5-1-anatsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-1. Anatsa — 정식 마켓을 통과한 오버레이·키로깅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-2. 지원금 사칭 앱 — 문자 인증번호 가로채기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-3-blackecho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-3. BlackEcho — 가짜 잠금화면과 화면 녹화
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-4. 참고 · 해외에서 확인된 최신 형태
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 공격자가 이 정보를 탈취하는 이유
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 탐지 관점 정리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 탐지 관점 정리">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7-1. 봐야 할 흔적
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7-2. 이 유형이 특히 까다로운 이유
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7-3. 플랫폼에서 받을 수 있는 신호
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        참고 자료
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="네비게이션" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../type-01-loader/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    금융 악성 행위 과정
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../type-02-deviceinfo/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    주요 악성 기능
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">금융·인증정보 탈취형</h1>
+<h2 id="1">1. 개요</h2>
+<p>이 유형은 <strong>금융계정에 접근하거나 거래를 승인하는 데 필요한 정보를 빼내는</strong> 악성 앱이다.</p>
+<p><a href="../type-02-deviceinfo/">개인·단말정보 탈취형</a>이 피해자가 누구인지 파악하는 단계라면, 이 유형은 <strong>그 정보로 실제 돈을 움직이기 직전 단계</strong>다. 탈취한 정보로 금융 앱에 로그인하고, 본인인증을 통과하고, 계좌이체나 결제를 시도한다. 이 유형에서 정보가 넘어가면 <strong>금융 피해까지 남은 거리가 매우 짧다.</strong></p>
+<p>가져가는 것은 크게 둘이다.</p>
+<ul>
+<li><strong>금융정보</strong> — 계좌번호·카드번호·금융 앱 계정처럼 돈에 직접 닿는 정보</li>
+<li><strong>인증정보</strong> — PIN·패턴·문자 인증번호처럼 "본인이 맞다"를 증명하는 수단</li>
+</ul>
+<h3 id="1-1">1-1. 무엇을 탈취하는가</h3>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>대표 정보</th>
+<th>공격자의 활용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>금융정보</td>
+<td>계좌번호, 카드번호, 유효기간, CVC, 금융 앱 계정정보</td>
+<td>계정 접근, 부정결제</td>
+</tr>
+<tr>
+<td>단말 인증정보</td>
+<td>화면 잠금 PIN·패턴</td>
+<td>단말 잠금 해제, 원격 조작 보조</td>
+</tr>
+<tr>
+<td>2차 인증정보</td>
+<td>문자 인증번호, OTP</td>
+<td>본인인증 및 거래 승인 우회</td>
+</tr>
+<tr>
+<td>금융거래 화면</td>
+<td>로그인·인증·이체 화면</td>
+<td>입력값 확인, 거래 진행 상황 감시</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-2">1-2. 다른 유형과 헷갈리는 지점</h3>
+<p>문자를 가져간다는 점은 <a href="../type-02-deviceinfo/">개인·단말정보 탈취형</a>과 겹친다. <strong>무엇을 노리고 가져가느냐</strong>로 구분한다.</p>
+<pre class="mermaid"><code>flowchart TD
+    A{"문자를 왜 가져가는가?"}
+    A -- "대화 내용 · 지인 관계 파악" --&gt; B["개인·단말정보 탈취형"]
+    A -- "인증번호 확보 ·&lt;br/&gt;본인인증 우회" --&gt; C["금융·인증정보 탈취형"]</code></pre>
+<p>실제 악성 앱은 두 목적을 함께 갖는 경우가 많다. 앱 하나가 문자를 통째로 가져가면 <strong>두 유형에 모두 해당</strong>한다고 보는 편이 안전하다.</p>
+<hr />
+<h2 id="2">2. 국내 확인 사례</h2>
+<table>
+<thead>
+<tr>
+<th>시기</th>
+<th>사례</th>
+<th>확인된 탈취 정보</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024.07</td>
+<td><a href="https://www.fsec.or.kr/bbs/detail?bbsNo=11508&amp;menuNo=69">해외 금융을 노리는 악성 앱, 한국에 상륙하다 (Anatsa)</a></td>
+<td>오버레이·키로깅으로 금융 앱 로그인정보, 스크린샷·문자·인증코드</td>
+</tr>
+<tr>
+<td>2025.08</td>
+<td><a href="https://blog.alyac.co.kr/5631">지원금 사칭 스미싱 앱</a></td>
+<td>수신 문자 본문·발신번호·수신시각, 단말정보</td>
+</tr>
+<tr>
+<td>2026.07</td>
+<td><a href="https://www.boho.or.kr/kr/bbs/view.do?bbsId=B0000133&amp;nttId=72131&amp;menuNo=205020">카드사 사칭 스미싱·피싱</a></td>
+<td>카드번호, 계좌번호, 유효기간, CVC</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-1-202508">2-1. 지원금 사칭 스미싱 앱 (이스트시큐리티, 2025.08)</h3>
+<p><code>국민지원금 신청대상자에 해당되므로 온라인센터에서 신청하시기 바랍니다</code>라는 문자로 시작해, <strong>정부24를 사칭한 가짜 사이트</strong>로 연결하고 악성 앱을 내려받게 한다.</p>
+<p>이 앱의 핵심은 문자 가로채기다. 단순히 읽어가는 것이 아니라 <strong>다른 앱이 그 문자를 받지 못하도록 수신을 중간에서 끊는다.</strong> 가져간 것은 <strong>문자 본문·발신번호·수신시각</strong>이며 단말 식별값과 함께 서버로 넘어간다.</p>
+<p>분석 자료는 이 기능이 <strong>금융 계정 접근과 2차 인증 우회에 그대로 쓰일 수 있다</strong>고 지적한다. 여기에 더해 감염 단말이 약 0.2초 간격으로 스미싱 문자를 자동 대량 발송하는 기능도 확인됐다.</p>
+<p><img alt="정부24 사칭 피싱 페이지와 악성 앱 다운로드 화면 (출처: 이스트시큐리티)" src="../../images/threat/type-03-credential/gov24-fake-site.png" /></p>
+<p>설치 화면에 뜬 문구가 눈에 띈다. <strong>"특별한 액세스 권한이 필요하지 않습니다."</strong> 실제로는 설치 직후부터 문자 수신·발송 권한을 요구한다. 설치 단계에서 권한을 숨기고 <strong>실행한 뒤에 요구</strong>하는 방식이다.</p>
+<h3 id="2-2-kisa-202607">2-2. 카드사 사칭 스미싱·피싱 (KISA, 2026.07)</h3>
+<p><code>OO카드</code> · <code>본인 확인</code> · <code>계정 정지</code> 같은 키워드를 쓴 문자로 시작한다. <code>계정 일시 보류</code>, <code>인증 절차</code> 같은 문구로 링크를 누르게 하고, 연결된 피싱사이트가 <strong>계정 인증 단계라며 카드번호·계좌번호·유효기간·CVC를 입력받는다.</strong></p>
+<p>악성 앱을 설치하지 않아도 성립한다는 점이 중요하다. <strong>피해자가 직접 입력하므로 단말에는 아무 흔적도 남지 않는다.</strong></p>
+<p><img alt="카드사 사칭 스미싱 유포 문구와 피싱사이트 정보 탈취 페이지 (출처: KISA 보호나라)" src="../../images/threat/type-03-credential/card-smishing-phishing.png" /></p>
+<p>피싱사이트가 <code>계정 확인 양식</code> · <code>Step 1. 카드인증</code>처럼 <strong>절차가 진행되는 것처럼 보이는 화면</strong>을 쓴다는 점도 눈여겨볼 만하다. <code>주기적인 결제비밀번호 변경 및 관리 철저</code> 같은 안내 문구까지 넣어 실제 카드사 화면처럼 꾸몄다.</p>
+<hr />
+<h2 id="3">3. 핵심 기능</h2>
+<p>정보를 가져가는 방식은 세 가지로 나뉜다. 세 가지를 <strong>같은 항목으로 정리</strong>했다.</p>
+<h3 id="3-1">3-1. 가짜 입력 화면</h3>
+<p>형태가 두 가지다. <strong>앱 없이 웹페이지만으로</strong> 하는 것과, <strong>앱을 설치해 진짜 금융 앱 위에 덮어씌우는</strong> 것이다.</p>
+<ul>
+<li><strong>동작 방식 ① 피싱 웹페이지</strong><ul>
+<li>문자 링크로 금융회사·카드사 홈페이지처럼 꾸민 웹페이지에 접속시킨다.</li>
+<li>본인 확인·계정 인증을 이유로 카드번호·계좌번호를 적어 넣게 한다.</li>
+<li><strong>악성 앱을 설치하지 않는다.</strong> 2026년 7월 카드사 사칭 사례가 여기에 해당한다.</li>
+</ul>
+</li>
+<li><strong>동작 방식 ② 오버레이</strong><ul>
+<li>악성 앱을 설치한 경우에 쓴다.</li>
+<li>피해자가 <strong>진짜 금융 앱을 실행한 그 순간</strong>, 악성 앱이 그 위에 똑같이 생긴 가짜 입력창을 덮어씌운다.</li>
+<li>피해자는 방금 자기가 켠 정상 앱에 입력한다고 믿지만, 입력값은 위에 덮인 가짜 창으로 들어간다.</li>
+</ul>
+</li>
+<li><strong>왜 통하는가</strong><ul>
+<li>피싱 웹페이지는 앱이 설치되지 않으므로 <strong>백신 검사 대상 자체가 없다.</strong> 피해자가 직접 입력하니 권한 요청도 없다.</li>
+<li>오버레이는 <strong>피해자가 실제로 정상 앱을 실행한 것이 맞다.</strong> 앱을 켠 기록도, 화면을 본 것도 전부 정상이라 단말 기록만 봐서는 이상한 점이 없다.</li>
+</ul>
+</li>
+<li><strong>한계와 조건</strong><ul>
+<li>오버레이를 쓰려면 "다른 앱 위에 표시" 권한이 필요하고, 이 권한은 사용자가 직접 켜야 한다.</li>
+<li>마켓을 거치지 않고 설치된 앱은 이 권한을 앱 안에서 유도해 켤 수 없다. 설정 앱의 해당 앱 정보 화면까지 사용자가 직접 들어가야 한다(안드로이드 15 기준. 안드로이드 13에서는 접근성·알림 접근에만 적용됐다).</li>
+<li>금융 앱이 <strong>화면이 가려진 상태의 터치를 무시</strong>하도록 만들어 두면 오버레이 입력이 통하지 않는다.</li>
+<li>피싱 웹페이지만으로는 문자 인증번호까지 얻지 못한다. 그래서 아래 3-2와 함께 쓰인다.</li>
+</ul>
+</li>
+</ul>
+<p>여기서 짚어둘 점이 있다. KISA는 <strong>문자에 있는 주소를 누른 것만으로는 악성 앱에 감염되지 않는다</strong>고 안내한다. 링크를 누르는 것과 앱을 설치하는 것은 다른 사건이다. 탐지 관점에서도 <strong>링크 접속 기록만으로는 감염을 판단할 수 없고, 설치가 일어났는지가 분기점</strong>이 된다.</p>
+<h3 id="3-2">3-2. 문자 인증번호 가로채기</h3>
+<ul>
+<li><strong>동작 방식</strong><ul>
+<li>문자 수신 권한을 얻어 들어오는 문자를 읽고, 본문·발신번호·수신시각을 서버로 보낸다.</li>
+<li>여기서 더 나아가 <strong>다른 앱이 그 문자를 받지 못하도록 수신을 중간에서 끊기도</strong> 한다.</li>
+<li>악성 앱을 <strong>기본 문자 앱으로 설정</strong>하도록 유도하는 경우도 있다. 기본 문자 앱이 되면 문자에 대한 제약이 크게 줄어든다.</li>
+</ul>
+</li>
+<li><strong>왜 통하는가</strong><ul>
+<li>피해자가 인증번호를 보지 못하면 이상을 눈치채기 어렵다. 문자가 안 오면 통신 문제라고 여긴다.</li>
+<li>문자 인증은 국내 금융거래의 본인확인 수단으로 널리 쓰인다. 이 하나가 뚫리면 <strong>비대면 계좌개설·대출·소액결제까지 이어진다.</strong></li>
+<li>문자 권한은 메신저나 전화 앱도 정상적으로 요구하는 권한이라 의심받지 않는다.</li>
+</ul>
+</li>
+<li><strong>한계와 조건</strong><ul>
+<li>안드로이드는 <strong>문자를 읽는 것</strong>과 <strong>문자함을 고치는 것</strong>을 다르게 취급한다. 문자 수신 권한만 있으면 들어오는 문자를 볼 수는 있어도, 문자함에서 문자를 지우거나 숨기지는 못한다. 그건 <strong>기본 문자 앱만</strong> 할 수 있다.</li>
+<li>그래서 공격자는 악성 앱을 <strong>기본 문자 앱으로 바꾸게</strong> 유도한다. 기본 문자 앱이 되면 인증번호 문자를 받는 즉시 지워, 피해자가 나중에 문자함을 뒤져봐도 아무것도 찾지 못하게 만들 수 있다.</li>
+<li><strong>문자를 쓰지 않는 인증에는 통하지 않는다.</strong> 금융 앱이 자체 생성하는 OTP, 앱 푸시 승인, 생체인증은 문자 가로채기로 넘을 수 없다.</li>
+<li>통신이 차단되면 가로챈 문자를 서버로 보내지 못한다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3">3-3. 잠금 인증정보와 금융거래 화면 탈취</h3>
+<ul>
+<li><strong>동작 방식</strong><ul>
+<li>가짜 잠금화면을 띄워 <strong>화면 잠금 PIN이나 패턴</strong>을 입력받는다.</li>
+<li>접근성 권한으로 화면에 표시되는 내용과 입력값을 읽는다.</li>
+<li>화면을 녹화해 서버로 보낸다. 인증 과정과 금융거래 화면을 그대로 볼 수 있다.</li>
+</ul>
+</li>
+<li><strong>왜 통하는가</strong><ul>
+<li>잠금화면은 하루에도 수십 번 보는 화면이라 <strong>의심 없이 입력한다.</strong></li>
+<li>접근성 권한은 원래 화면을 읽고 대신 조작하라고 만든 기능이다. 악용해도 동작 자체는 정상 범위다.</li>
+<li>화면 녹화는 입력값을 직접 훔치지 않고도 <strong>인증 과정 전체를 볼 수 있게</strong> 해준다.</li>
+</ul>
+</li>
+<li><strong>한계와 조건</strong><ul>
+<li>접근성 권한은 사용자가 설정에서 직접 켜야 하고, 안드로이드 13부터 마켓을 거치지 않은 앱은 앱 안에서 유도해 켤 수 없다.</li>
+<li>금융 앱이 화면 보호를 켜 두면 캡처·녹화 결과가 빈 화면으로 남는다.</li>
+<li>최신 안드로이드는 정식 접근성 도구가 아닌 앱이 <strong>민감한 화면 내용을 읽지 못하도록</strong> 막는 수단을 제공한다.</li>
+<li>가짜 잠금화면으로 얻은 값은 어디까지나 입력받은 값이다. 실제 단말 잠금을 푸는 데는 별도 조작이 필요하다.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="4">4. 전체 공격 흐름</h2>
+<pre class="mermaid"><code>flowchart TD
+    A["금융회사·카드사·&lt;br/&gt;정부지원금 사칭"] --&gt; B["악성 앱 설치 또는&lt;br/&gt;피싱 화면 접속"]
+    B --&gt; C["금융정보를 직접&lt;br/&gt;입력하도록 유도"]
+    C --&gt; D["문자 · 접근성 ·&lt;br/&gt;화면 권한 확보"]
+    D --&gt; E["인증번호 · PIN·패턴 ·&lt;br/&gt;금융거래 화면 탈취"]
+    E --&gt; F["C2 서버로 전송"]
+    F --&gt; G["금융계정 접근 및&lt;br/&gt;본인인증 우회"]
+    G --&gt; H["부정이체 · 결제 등&lt;br/&gt;금융 피해로 연결"]</code></pre>
+<p>앞선 두 유형과 결정적으로 다른 점이 있다. <strong>여기서부터는 공격자가 피해자를 흉내 낼 수 있다.</strong> 계정과 인증수단을 모두 쥐게 되므로, 금융회사 입장에서는 정상 이용자의 거래와 구분하기 어려워진다.</p>
+<hr />
+<h2 id="5">5. 실제 사례에서 확인된 구조</h2>
+<h3 id="5-1-anatsa">5-1. Anatsa — 정식 마켓을 통과한 오버레이·키로깅</h3>
+<p>2024년 7월 금융보안원은 해외 뱅킹 악성코드 <strong>Anatsa</strong>가 국내 금융을 대상으로 공격 범위를 넓힌 것을 확인했다. 국내 유입이 공식 확인된 사례라는 점에서 의미가 크다.</p>
+<p><img alt="Anatsa 악성 앱 설치 및 동작 과정 (출처: 금융보안원)" src="../../images/threat/type-03-credential/anatsa-flow.png" /></p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>유포 경로</td>
+<td>PDF 리더·QR코드 스캐너 등으로 위장해 <strong>구글 플레이</strong>를 통해 배포</td>
+</tr>
+<tr>
+<td>설치 방식</td>
+<td>마켓에 올라간 위장 앱이 <strong>앱 업데이트를 가장해</strong> 본체를 내려받아 설치</td>
+</tr>
+<tr>
+<td>탈취 방식</td>
+<td>키로깅으로 입력값을 가로채고, 오버레이로 가짜 뱅킹 로그인 화면을 띄움</td>
+</tr>
+<tr>
+<td>탈취 대상</td>
+<td>스크린샷, 문자, 인증코드</td>
+</tr>
+<tr>
+<td>단말 제어</td>
+<td>화면잠금 해제, 화면 터치, 값 입력</td>
+</tr>
+<tr>
+<td>방해 기능</td>
+<td>모바일 백신·클리너 실행 방해, 앱 삭제 차단</td>
+</tr>
+<tr>
+<td>규모</td>
+<td>2024년 6월 기준 한국 포함 <strong>54개국 688개 금융·핀테크·가상화폐 앱</strong>이 대상</td>
+</tr>
+</tbody>
+</table>
+<p>여기서 두 가지를 짚어둘 만하다.</p>
+<p><strong>하나. 정식 마켓 심사를 통과했다.</strong> 설치 시점에는 악성 기능이 없는 껍데기 앱이었기 때문이다. 이 구조 자체는 <a href="../type-01-loader/">로더·드로퍼·다운로더형</a>에서 다룬 것과 같다.</p>
+<p><strong>둘. 백신 실행을 방해하고 삭제를 막는다.</strong> 감염을 발견해도 정리가 쉽지 않다는 뜻이다.</p>
+<h3 id="5-2">5-2. 지원금 사칭 앱 — 문자 인증번호 가로채기</h3>
+<p>2025년 8월 확인된 정부24 사칭 앱은 문자 가로채기에 집중한 형태였다.</p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>동작</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>유인</td>
+<td>지원금 신청 안내 문자로 가짜 정부24 사이트 접속 유도</td>
+</tr>
+<tr>
+<td>설치</td>
+<td>"맞춤 혜택 조회하기" 버튼을 누르면 악성 앱 내려받기</td>
+</tr>
+<tr>
+<td>권한</td>
+<td>문자 수신·발송, 전화번호 조회, 배터리 최적화 제외</td>
+</tr>
+<tr>
+<td>가로채기</td>
+<td>문자 수신을 <strong>중간에서 끊어</strong> 다른 앱에 전달되지 않게 차단</td>
+</tr>
+<tr>
+<td>전송</td>
+<td>문자 본문·발신번호·수신시각을 단말 식별값과 함께 서버로 전송</td>
+</tr>
+<tr>
+<td>재확산</td>
+<td>약 0.2초 간격으로 스미싱 문자 자동 대량 발송</td>
+</tr>
+</tbody>
+</table>
+<p>설치 시점에는 특별한 권한을 요구하지 않다가 <strong>실행한 뒤에 권한을 요구</strong>하는 점도 확인됐다. 설치 직후 검사에서는 별다른 신호가 나오지 않는다는 뜻이다.</p>
+<h3 id="5-3-blackecho">5-3. BlackEcho — 가짜 잠금화면과 화면 녹화</h3>
+<p>Operation BlackEcho의 2차 악성 앱은 공격자 명령을 받으면 <strong>범죄조직이 만든 잠금화면을 띄워 PIN 또는 패턴을 입력받았다.</strong> 입력된 값은 그대로 서버로 전송된다.</p>
+<p>여기에 더해 <strong>화면을 기본 6분간 녹화해 전송</strong>하는 기능도 있었다. 피해자의 인증 과정과 금융거래 화면을 그대로 볼 수 있다는 뜻이다.</p>
+<p><img alt="2차 앱의 실행 화면 — 접근성 권한 요청부터 PIN·패턴 탈취까지 (출처: 금융보안원, Operation BlackEcho)" src="../../images/threat/type-03-credential/second-app-screens.png" /></p>
+<p>위 화면이 <strong>권한을 얻어내는 순서</strong>를 그대로 보여준다. 접근성 권한을 먼저 요구하고, 카메라·위치·사진·녹음·연락처·통화기록·문자 권한을 차례로 받아낸다. 이어서 <strong>기본 전화 앱으로 설정</strong>하게 하고 배터리 최적화에서 제외시켜 백그라운드에 계속 남는다. 이 준비가 끝난 뒤에야 마지막 단계로 <strong>가짜 비밀번호 입력 화면</strong>이 뜬다.</p>
+<p>여기서 눈여겨볼 점이 있다. 요구하는 권한이 <strong>앱마다 다르다.</strong> 백신을 자처하는 쪽은 카메라·위치·오디오를, 전화 앱을 자처하는 쪽은 연락처·통화기록·문자를 요구한다. <strong>각자 위장한 정체에 어울리는 권한만 요구</strong>해서 의심을 피한다.</p>
+<p>화면 조작과 실시간 감시에 대한 상세는 <a href="../type-05-remotecontrol/">원격제어·화면감시형</a> 문서에서 다룬다.</p>
+<h3 id="5-4">5-4. 참고 · 해외에서 확인된 최신 형태</h3>
+<p>2026년 공개된 <strong>로카롤라(Rokarolla)</strong> 는 이 유형의 기능이 어디까지 모여 있는지 보여준다. 217개 금융·가상화폐 앱을 대상으로 하며, 특정 금융 앱을 모방한 가짜 로그인 화면과 가짜 잠금화면으로 <strong>로그인정보와 PIN·패턴을 함께</strong> 가져간다. 문자 전체를 읽고 발송할 수 있어 일회용 인증번호를 가로채 다중인증을 우회하며, 최초 배포 파일은 <strong>구글 플레이 프로텍트로 위장</strong>한 드로퍼였다.</p>
+<hr />
+<h2 id="6">6. 공격자가 이 정보를 탈취하는 이유</h2>
+<ul>
+<li><strong>금융계정에 직접 로그인하기 위해서</strong> — 계정정보만 있으면 피해자의 금융 앱에 그대로 들어갈 수 있다.</li>
+<li><strong>본인인증 절차를 우회하기 위해서</strong> — 문자 인증번호나 PIN을 확보하면 "본인이 맞다"는 확인 단계를 그대로 통과한다.</li>
+<li><strong>단말 잠금을 풀고 금융 앱을 조작하기 위해서</strong> — PIN·패턴이 넘어가면 피해자의 단말 자체를 열어 직접 조작할 수 있다.</li>
+<li><strong>이체·결제 승인에 필요한 정보를 확보하기 위해서</strong> — 카드번호·유효기간·CVC가 모이면 결제 승인까지 완결된다.</li>
+<li><strong>피해자 명의로 새 금융거래를 만들기 위해서</strong> — 문자 인증이 뚫리면 비대면 계좌개설·대출·소액결제 같은 신규 거래까지 가능해진다.</li>
+</ul>
+<hr />
+<h2 id="7">7. 탐지 관점 정리</h2>
+<h3 id="7-1">7-1. 봐야 할 흔적</h3>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>주요 흔적</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>권한 조합</td>
+<td>앱 기능과 무관한 문자 수신·발송 권한 · 다른 앱 위에 표시 권한 · 접근성 권한 요구</td>
+</tr>
+<tr>
+<td>화면</td>
+<td>금융 앱 실행 시점에 다른 앱의 창이 위에 겹쳐짐 · 화면 캡처나 녹화가 동작 중</td>
+</tr>
+<tr>
+<td>문자</td>
+<td>인증번호 문자가 도착하지 않음 · 사용자가 보내지 않은 문자 발송</td>
+</tr>
+<tr>
+<td>통신</td>
+<td>문자 수신 직후 발생하는 외부 전송 · 금융 앱 실행과 시점이 겹치는 통신</td>
+</tr>
+<tr>
+<td>단말 상태</td>
+<td>백신 앱이 실행되지 않거나 삭제가 막힘</td>
+</tr>
+</tbody>
+</table>
+<p><strong>권한을 요구한다는 사실 자체가 신호가 되기도 한다.</strong> 구글 플레이 정책은 접근성 도구로 인정되는 앱을 장애 사용자를 위한 서비스로 한정하고, <strong>안티바이러스·자동화 도구·모니터링 앱은 여기에 해당하지 않는다</strong>고 명시한다. 또한 앱이 스스로 판단해 동작을 실행하도록 만드는 접근성 API 사용을 금지한다. 따라서 <strong>백신을 자처하는 앱이 접근성 권한을 요구한다면 그 요구 자체가 정책에 어긋난다.</strong> <br/> 정상 백신이라면 하지 않을 요구다.</p>
+<h3 id="7-2">7-2. 이 유형이 특히 까다로운 이유</h3>
+<table>
+<thead>
+<tr>
+<th>어려운 점</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>권한을 안 쓰는 경로가 있다</td>
+<td>피싱 화면에 피해자가 직접 입력하는 정보는 권한 요청이 전혀 없어, 권한 기반 탐지에 걸리지 않는다.</td>
+</tr>
+<tr>
+<td>앱이 아예 없을 수도 있다</td>
+<td>웹페이지만으로 카드정보를 받아내면 단말에 설치되는 것이 없다. 백신 검사 대상 자체가 없다.</td>
+</tr>
+<tr>
+<td>인증이 정상적으로 통과된다</td>
+<td>가로챈 인증번호는 진짜다. 금융회사 입장에서는 본인확인이 정상 처리된 것으로 보인다.</td>
+</tr>
+<tr>
+<td>피해자가 이상을 못 느낀다</td>
+<td>인증번호 문자가 안 오면 통신 문제로 여기고, 오버레이는 정상 앱 화면과 구분되지 않는다.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-3">7-3. 플랫폼에서 받을 수 있는 신호</h3>
+<p>안드로이드는 화면을 훔쳐보거나 조작하는 앱을 판별하는 신호를 앱에 제공한다. FDS 룰에서 <br/> 활용할 수 있는 부분이다.</p>
+<table>
+<thead>
+<tr>
+<th>신호</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>화면 캡처 가능 앱 감지</td>
+<td>현재 화면을 보거나 캡처할 수 있는 다른 앱이 실행 중</td>
+</tr>
+<tr>
+<td>화면 제어 가능 앱 감지</td>
+<td>화면 캡처와 입력 제어를 모두 할 수 있는 앱이 실행 중</td>
+</tr>
+<tr>
+<td>앱 보호 기능 상태</td>
+<td>단말의 앱 검사 기능이 꺼져 있거나 위험 앱이 탐지됨</td>
+</tr>
+</tbody>
+</table>
+<p>공식 가이드는 이런 신호가 잡혔을 때 <strong>거래를 무조건 막기보다 추가 확인 절차를 제시하라</strong>고 권고한다. 정상 접근성 앱을 쓰는 이용자를 차단하지 않기 위해서다.</p>
+<p>한 가지 더. 안드로이드 13부터는 <strong>마켓을 거치지 않고 설치된 앱</strong>이 접근성 권한을 얻으려면, 사용자가 설정 앱의 해당 앱 정보 화면까지 직접 들어가 허용해야 한다. 앱 안에서 유도해 켤 수 없다. 안드로이드 15부터는 다른 앱 위에 표시 권한과 기본 전화·문자 앱 역할까지 같은 절차를 거친다. <strong>이 절차를 피해자가 통과했다면 상당한 수준의 유도가 있었다는 뜻</strong>이므로, 감염 정황을 강하게 시사하는 신호로 볼 수 있다.</p>
+<div class="admonition warning">
+<p class="admonition-title">가장 어려운 점</p>
+<p>이 유형은 <strong>탈취가 끝나면 공격자의 거래와 피해자의 거래가 구분되지 않는다.</strong> 계정도 맞고 인증번호도 맞고 단말도 피해자의 것이다. 개별 거래만 보면 모든 항목이 정상이다. 따라서 거래 자체보다 <strong>그 거래 직전에 단말에서 무슨 일이 있었는지</strong>, 그리고 <strong>인증 수단이 평소와 다르게 쓰이지 않았는지</strong>를 함께 봐야 한다.</p>
+</div>
+<hr />
+<h2 id="_2">참고 자료</h2>
+<ul>
+<li>KISA 보호나라, 「카드사 사칭 스미싱·피싱 주의 권고」, 2026.07.16 — <a href="https://www.boho.or.kr/kr/bbs/view.do?bbsId=B0000133&amp;nttId=72131&amp;menuNo=205020">https://www.boho.or.kr/kr/bbs/view.do?bbsId=B0000133&amp;nttId=72131&amp;menuNo=205020</a></li>
+<li>이스트시큐리티 알약 블로그, 「국민지원금 스미싱 수법을 재활용한 지원금 사칭 스미싱 주의!」, 2025.08.25 — <a href="https://blog.alyac.co.kr/5631">https://blog.alyac.co.kr/5631</a></li>
+<li>금융보안원, 「해외 금융을 노리는 악성 앱, 한국에 상륙하다: 금융소비자 주의 필요」(Anatsa), 2024.07.03 — <a href="https://www.fsec.or.kr/bbs/detail?bbsNo=11508&amp;menuNo=69">https://www.fsec.or.kr/bbs/detail?bbsNo=11508&amp;menuNo=69</a></li>
+<li>금융보안원, 「금융 및 백신 앱으로 위장한 보이스피싱 악성 앱 프로파일링」(Operation BlackEcho), 2024.12 — <a href="https://www.fsec.or.kr/bbs/detail?bbsNo=11611&amp;menuNo=244">https://www.fsec.or.kr/bbs/detail?bbsNo=11611&amp;menuNo=244</a></li>
+<li>Zscaler ThreatLabz, 「Technical Analysis of Anatsa Campaigns」, 2024.05.27 — <a href="https://www.zscaler.com/blogs/security-research/technical-analysis-anatsa-campaigns-android-banking-malware-active-google">https://www.zscaler.com/blogs/security-research/technical-analysis-anatsa-campaigns-android-banking-malware-active-google</a></li>
+<li>데일리시큐, 「217개 금융앱 노린 안드로이드 악성코드 '로카롤라' 등장」 — <a href="https://www.dailysecu.com/news/articleView.html?idxno=207194">https://www.dailysecu.com/news/articleView.html?idxno=207194</a></li>
+<li>Google Play, 「Use of the AccessibilityService API」 — <a href="https://support.google.com/googleplay/android-developer/answer/10964491">https://support.google.com/googleplay/android-developer/answer/10964491</a></li>
+<li>Android Developers, 「Protect against fraud」 — <a href="https://developer.android.com/security/fraud-prevention">https://developer.android.com/security/fraud-prevention</a></li>
+<li>용어 정의는 <a href="../../99-appendix/glossary/">부록 · 용어 정리</a> 참고</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../type-02-deviceinfo/" class="md-footer__link md-footer__link--prev" aria-label="이전: 개인·단말정보 탈취형">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                개인·단말정보 탈취형
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../type-04-callcontrol/" class="md-footer__link md-footer__link--next" aria-label="다음: 통화·문자 제어형">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                통화·문자 제어형
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/Rakkk-s/mobile-security-fds-docs" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "toc.follow", "search.highlight", "search.suggest", "content.code.copy", "content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

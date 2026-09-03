@@ -1,0 +1,1986 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="시큐리티 아카데미 8기 안랩 트랙 · TEAM Rak's 프로젝트 문서">
+      
+      
+      
+        <link rel="canonical" href="https://rakkk-s.github.io/mobile-security-fds-docs/00-flow/entry-02-smishing/">
+      
+      
+        <link rel="prev" href="../entry-01-voicephishing/">
+      
+      
+        <link rel="next" href="../entry-03-qshing/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>스미싱 - 금융권 모바일 보안 위협 분석 및 대응 시스템 설계</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans KR";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="금융권 모바일 보안 위협 분석 및 대응 시스템 설계" class="md-header__button md-logo" aria-label="금융권 모바일 보안 위협 분석 및 대응 시스템 설계" data-md-component="logo">
+      
+  <img src="../../assets/logo-white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            금융권 모바일 보안 위협 분석 및 대응 시스템 설계
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              스미싱
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../entry-01-voicephishing/" class="md-tabs__link">
+          
+  
+  
+  주요 위협 분석
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../01-threat/type-01-loader/" class="md-tabs__link">
+          
+  
+  
+  금융 악성 행위 과정
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02-scenario/scenario-01-card-smishing/" class="md-tabs__link">
+          
+  
+  
+  공격 시나리오
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../04-architecture/module-integration/" class="md-tabs__link">
+          
+  
+  
+  보안 아키텍처
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../05-fds-rule/principles/" class="md-tabs__link">
+          
+  
+  
+  FDS 룰 설계
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="금융권 모바일 보안 위협 분석 및 대응 시스템 설계" class="md-nav__button md-logo" aria-label="금융권 모바일 보안 위협 분석 및 대응 시스템 설계" data-md-component="logo">
+      
+  <img src="../../assets/logo-white.png" alt="logo">
+
+    </a>
+    금융권 모바일 보안 위협 분석 및 대응 시스템 설계
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    주요 위협 분석
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    주요 위협 분석
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entry-01-voicephishing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    보이스피싱
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스미싱
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스미싱
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 공격 유형 설명 및 정의
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 실제 피해 현황
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 실제 피해 현황">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 피해 추이
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 대표 사례
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 공격 흐름 정의
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 피해자가 속는 지점
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 탐지 관점 정리
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        참고 자료
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entry-03-qshing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    큐싱
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entry-04-malapp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    악성 앱
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    공격 흐름
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    금융 악성 행위 과정
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    금융 악성 행위 과정
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    악성 앱 설치 구조
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    악성 앱 설치 구조
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-threat/type-01-loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    로더·드로퍼·다운로더형
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    주요 악성 기능
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    주요 악성 기능
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-threat/type-02-deviceinfo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개인·단말정보 탈취형
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-threat/type-03-credential/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    금융·인증정보 탈취형
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-threat/type-04-callcontrol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    통화·문자 제어형
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-threat/type-05-remotecontrol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    원격제어·화면감시형
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    공격 시나리오
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    공격 시나리오
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-scenario/scenario-01-card-smishing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    카드사 사칭 스미싱
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-scenario/scenario-02-qshing-dropper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    큐싱 기반 드로퍼
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-scenario/scenario-03-nfc-relay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NFC 릴레이 공격
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-scenario/scenario-04-loan-remotecontrol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    대출 사칭 원격제어
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    보안 아키텍처
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    보안 아키텍처
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-architecture/module-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    모듈 연동 구조
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FDS 룰 설계
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FDS 룰 설계
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-fds-rule/principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    룰 설계 원칙
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-fds-rule/rule-catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    룰 정의서
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-fds-rule/scenario-mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시나리오 ↔ 룰 매핑
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-fds-rule/validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    룰 검증
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 공격 유형 설명 및 정의
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 실제 피해 현황
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 실제 피해 현황">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 피해 추이
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 대표 사례
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 공격 흐름 정의
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 피해자가 속는 지점
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 탐지 관점 정리
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        참고 자료
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="네비게이션" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../entry-01-voicephishing/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    주요 위협 분석
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">스미싱</h1>
+<div class="admonition abstract">
+<p class="admonition-title">한눈에 보기</p>
+<p>문자메시지에 악성 URL을 심어 피싱사이트 접속이나 <strong>악성 앱 설치</strong>를 유도한다. 심리적 유인(사회공학)과 기술적 탈취가 결합된 공격으로, 그 자체로 끝나기보다 <strong>보이스피싱·악성 앱 감염의 진입 경로</strong>로 기능한다.</p>
+</div>
+<h2 id="1">1. 공격 유형 설명 및 정의</h2>
+<p>스미싱(Smishing)은 SMS와 피싱(Phishing)의 합성어로, 문자메시지를 통해 수신자를 기망하여 악성 URL 접속을 유도하고 개인정보·금융정보를 탈취하거나 악성 앱을 설치시키는 전기통신금융사기 수법이다. 공격은 두 개의 층위로 구성된다.</p>
+<p><strong>심리적 수법</strong>에서는 관심·불안·긴급 심리를 자극하는 미끼 문구로 "확인이 필요한 상황"을 조성해 단일 행동(URL 클릭)을 유도하고, <strong>기술적 수법</strong>에서는 발신번호 변작, 단축 URL을 통한 목적지 은닉, 탐지 회피를 위한 신규 도메인 사용, 문자 대량발송 인프라 악용이 결합된다.</p>
+<p>스미싱은 단독 범죄로 완결되기보다 후속 공격의 진입 경로로 기능하는 경우가 많다. 2024년 보이스피싱 피해액이 재급증(8,545억 원)한 주요 원인도 미끼문자와 악성 앱(원격제어)이 결합한 수법이었다. 
+(<a href="../entry-01-voicephishing/">보이스피싱</a> 참조) </p>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>미끼·수법</th>
+<th>유도 목표</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>금융기관 사칭</strong></td>
+<td>카드 개통 완료·이상 거래·결제 승인 안내, [국제발신] + 카드사명 + 문의번호 병기</td>
+<td>회신 전화 → 보이스피싱 연계</td>
+</tr>
+<tr>
+<td><strong>대출 사기</strong></td>
+<td>저금리·긴급 승인·연체자 가능, 카카오톡 ID로만 상담 유도</td>
+<td>메신저 이동 → 개인정보·수수료 편취</td>
+</tr>
+<tr>
+<td><strong>정부기관 사칭</strong></td>
+<td>과태료·범칙금 통지 (교통경찰청, 이파인 사칭)</td>
+<td>피싱사이트 → 개인정보 입력</td>
+</tr>
+<tr>
+<td><strong>택배 사칭</strong></td>
+<td>배송 지연·주소 오류·본인 확인 요청</td>
+<td>피싱사이트·APK 설치</td>
+</tr>
+<tr>
+<td><strong>청첩장·부고 위장</strong></td>
+<td>경조사 소식 + 식장/빈소 링크로 감정적 동요 악용</td>
+<td>APK 설치 → 단말 장악</td>
+</tr>
+<tr>
+<td><strong>가족 사칭</strong></td>
+<td>"엄마 지금 뭐해?" 식 대화 접근 후 점진적 요구 상승</td>
+<td>원격제어 앱 설치·인증번호 요구</td>
+</tr>
+</tbody>
+</table>
+<p>모든 유형의 공통 구조는 <strong>즉시성 압박 + '확인이 필요한 상황' 조성 → 단일 행동(URL 클릭/회신) 유도</strong>다.</p>
+<div class="admonition note">
+<p class="admonition-title">최근 추세 — 실제 사건을 미끼로 쓰는 진화</p>
+<p>기존 스미싱이 가상의 상황(가짜 택배, 가짜 과태료)을 지어냈다면, 최근 유형은 <strong>실제로 일어난 사건과 실제 정책을 미끼로 사용</strong>한다. 피해자 입장에서 "사실 확인"이 오히려 미끼를 강화해주기 때문에 성공률이 높다.</p>
+<p><strong>① 대규모 유출 사고 연계형</strong> </p>
+<p>이커머스·플랫폼 해킹 사고 직후 그 사고를 빙자해 "피해사실 조회", "피해보상 신청", "긴급 앱 업데이트" 문자를 대량 유포한다. 실제 유출된 정보보다 <strong>유출 사실이 만들어낸 불안감을 악용한 2차 피싱</strong>이 실질 피해로 이어진다.</p>
+<p><img alt="유출 사고 연계형 스미싱 문자 예시" src="../../images/flow/entry-02-smishing/smishing-leak.png" /></p>
+<p><em>출처: KISA 보호나라 보안공지 「개인정보 유출 사고 관련 스미싱 주의 권고」</em></p>
+<p><br/></p>
+<p><strong>② 시의성 이슈 편승형</strong> </p>
+<p>명절, 민생회복 쿠폰, 고유가 지원금 등 특정 시점의 정책·행사에 맞춰 정부24 등을 사칭한다. 실제 정책이 존재하고 시기도 일치해 정상 안내와 구분이 어렵다.</p>
+<p><img alt="정부 지원금 사칭 스미싱 문자 예시" src="../../images/flow/entry-02-smishing/smishing-gov24.jpg" width="400" /></p>
+<p><em>출처: KISA 보호나라 보안공지 「정부 지원금 신청 사칭 스미싱 주의 권고」</em></p>
+<p><br/></p>
+<p><strong>③ 계정 탈취형</strong> </p>
+<p>"계정 비활성화", "미인증 시 탈퇴" 등을 빙자해 가짜 로그인 페이지로 유도, 계정·이메일·전화번호를 탈취한다. Telegram·Apple·Instagram 사칭이 대량 탐지되며, 탈취된 계정은 지인 사칭 공격의 발판으로 재사용된다.</p>
+<p><img alt="계정 탈취 유형 스미싱·피싱 예시" src="../../images/flow/entry-02-smishing/smishing-acc.png" /></p>
+<p><em>출처: KISA 보호나라 보안공지 「계정 탈취 유형 스미싱·피싱 주의 권고」</em></p>
+</div>
+<hr />
+<h2 id="2">2. 실제 피해 현황</h2>
+<h3 id="21">2.1 피해 추이</h3>
+<p><img alt="피싱 문자 사칭 유형 비율" src="../../images/flow/entry-02-smishing/smishing-ahnlab-pie.png" width="600" /></p>
+<p><em>출처: 안랩(AhnLab), 「2026년 1분기 스미싱 위협 동향」</em></p>
+<p>안랩의 2026년 1분기 분석에 따르면 사칭 유형은 <strong>금융기관 사칭이 53.62%</strong>(전분기 대비 +9.38%p)로 최다이고 대출 사기 18.72%가 뒤를 잇는다. 특히 <strong>대출 사기는 전분기 대비 205.15% 급증</strong>한 반면 정부기관 사칭(−51.99%)과 텔레그램 사칭(−22.55%)은 감소해, 공격자가 직접적 금전 성과가 기대되는 금융·대출 시나리오로 집중 이동하고 있음을 보여준다. 수신자 관점의 통계도 같은 방향이다 — 카카오뱅크가 2026년 상반기 접수된 의심 문자 10,024건을 분석한 결과 금융거래·인증 사칭이 합산 61%를 차지했다.</p>
+<p><img alt="스미싱 유도 방식 분포" src="../../images/flow/entry-02-smishing/smishing-method.svg" /></p>
+<p><em>출처: 안랩(AhnLab), 「2026년 1분기 스미싱 위협 동향」</em></p>
+<p>유도 방식은 <strong>URL 클릭이 81.36%로 압도적 단일 경로</strong>다(메신저 9.18%, 전화 8.59%, SMS 회신 0.86%). 공격의 8할이 하나의 관문을 지나므로, URL 접속과 그 이후의 앱 설치 행위가 탐지·차단 설계의 1순위 지점이 된다. 스미싱 단독 분류 피해액은 상대적으로 작게 집계되지만, 스미싱을 진입 경로로 삼은 보이스피싱·악성 앱 피해는 별도 통계로 잡히기 때문에 <strong>실질 피해 기여도는 수치보다 훨씬 크다.</strong></p>
+<h3 id="22">2.2 대표 사례</h3>
+<div class="admonition example">
+<p class="admonition-title">사례 ① — 국내 최대 스미싱 조직, 피해액 120억 원 · 서울경찰청 2025.11</p>
+<p>청첩장·부고장·과태료 고지서로 위장한 문자에 악성 링크를 발송, 클릭 시 악성 앱을 설치해 단말 권한을 탈취한 조직이 검거됐다. 조직은 탈취한 권한으로 <strong>피해자 명의 유심(USIM)을 무단 개통해 본인인증 수단을 확보</strong>한 뒤 금융계좌·가상자산 거래소에서 자금을 인출했다. 2년간 피해자 약 1,000명, 피해액 약 120억 원으로 국내 최대 규모다. 수사 과정에서 글꼴이 다르거나 실존하지 않는 기관명이 적힌 <strong>위조 신분증으로도 금융 앱의 진위 확인을 통과</strong>하는 본인인증 취약점이 확인돼 통신사·금융기관에 공유됐다.</p>
+<p><strong>💡 시사점</strong> - 제출 서류(정적 증빙)만으로는 명의도용을 걸러낼 수 없다. 단말 환경·행위 기반 판별이 필요하며, 유심 재개통 → 본인인증 우회 흐름은 <strong>"기기·인증수단 변경 직후 고액 거래"라는 탐지 룰 후보</strong>를 제공한다.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">사례 ② — 대규모 유출 사고 연계 스미싱 · 2025.11~12</p>
+<p>국내 대형 이커머스 개인정보 유출 사고 직후, 피해 기업과 검·경을 사칭한 "피해보상 신청"·"피해사실 조회"·"긴급 앱 업데이트" 문자가 대량 유포됐다. URL 클릭 시 피싱사이트에서 본인확인 명목으로 개인정보를 입력받고, 이어서 악성 앱·원격제어 앱 설치로 연결됐다. 검·경 "공정거래 수사팀 사무관"을 사칭해 접근하거나 포털 검색결과 상단에 피싱사이트를 광고로 노출하는 수법도 확인됐다(2025년 12월 기준 스미싱 49건, 보이스피싱 5건 적발).</p>
+<p><strong>💡 시사점</strong> - 피해자는 "실제로 내 정보가 유출된 게 맞다"는 참인 사실 때문에 의심을 건너뛴다. <strong>기존 보안 교육이 무력화되는 지점</strong>이며, 타사 유출 사고 직후에는 자사 고객의 피싱 노출도가 함께 급등한다.</p>
+</div>
+<hr />
+<h2 id="3">3. 공격 흐름 정의</h2>
+<pre class="mermaid"><code>flowchart LR
+    A["&lt;span style='color:#FFFFFF'&gt;① 유입&lt;br/&gt;미끼 문자·URL&lt;/span&gt;"] --&gt; B["&lt;span style='color:#FFFFFF'&gt;② 실행&lt;br/&gt;피싱사이트·앱 설치&lt;/span&gt;"]
+    B --&gt; C["&lt;span style='color:#FFFFFF'&gt;③ 탈취&lt;br/&gt;상시 수집·가로채기&lt;/span&gt;"]
+    C --&gt; D["&lt;span style='color:#FFFFFF'&gt;④ 악용·금전화&lt;br/&gt;결제·이체·개통&lt;/span&gt;"]
+    classDef s1 fill:#9575CD,stroke:#7E57C2,stroke-width:1px
+    classDef s2 fill:#7E57C2,stroke:#673AB7,stroke-width:1px
+    classDef s3 fill:#5E35B1,stroke:#4527A0,stroke-width:1px
+    classDef s4 fill:#311B92,stroke:#1A0E5C,stroke-width:1.5px
+    class A s1
+    class B s2
+    class C s3
+    class D s4</code></pre>
+<p><em>배경이 짙어질수록 단말 장악도와 피해 위험이 높아진다.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">단계</th>
+<th style="text-align: left;">핵심 행위</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>① 유입</strong></td>
+<td style="text-align: left;">미끼 문자 대량 발송. [국제발신] 표시, 실존 브랜드명, 단축 URL(목적지 은닉), 신규 등록 도메인 사용</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>② 실행</strong></td>
+<td style="text-align: left;">피싱사이트에서 정보 입력 유도 또는 APK 설치. OS 설치 경고를 넘기게 유도하고, 기본 SMS 앱 변경·시스템 권한 요구 후 아이콘 은닉</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>③ 탈취</strong></td>
+<td style="text-align: left;">SMS·연락처·SIM 저장 번호 상시 수집, 수신 인증문자를 사용자 몰래 가로채기</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>④ 악용·금전화</strong></td>
+<td style="text-align: left;">소액결제·상품권 현금화, 오픈뱅킹 이체, 유심 개통으로 본인인증 우회, 비대면 대출, 감염 단말로 미끼문자 2차 재발송</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">피싱사이트는 종착점이 아니라 통로</p>
+<p>실행 단계에서 피싱사이트로 끝나는 경우 피해는 입력값에 한정된 1회성이다. 그러나 실제 사례 대부분에서 피싱사이트는 <strong>악성 앱(APK)의 배포 통로</strong>로 쓰이며, 앱 설치까지 진행되면 상시·지속 탈취로 전환된다. 사이트 내 '배송조회' 같은 부가 기능을 실제 회사 사이트로 연결해 신뢰를 얻는 위장 기법도 확인된다.</p>
+</div>
+<hr />
+<h2 id="4">4. 피해자가 속는 지점</h2>
+<ul>
+<li><strong>참인 사실을 미끼로 쓴다</strong> — 유출 사고 연계형은 "실제로 내 정보가 유출됐다"는 사실을 근거로 삼는다. 지어낸 거짓이 아니라 진짜 사건 위에 사기를 얹기 때문에 "의심스러우면 클릭하지 마세요"라는 교육이 작동하지 않는다.</li>
+<li><strong>일부 기능이 진짜처럼 동작한다</strong> — 피싱사이트의 '배송조회' 같은 부가 기능은 실제 회사 사이트로 연결된다. 일부가 정상 동작하는 것을 본 피해자는 사이트 전체를 신뢰하게 된다.</li>
+<li><strong>즉시 행동을 강요한다</strong> — "결제 승인", "계정 비활성화" 같은 문구로 확인이 급한 상황을 조성해, 검증할 시간 자체를 주지 않는다.</li>
+</ul>
+<hr />
+<h2 id="5">5. 탐지 관점 정리</h2>
+<p>사용자의 주의력에 기댄 방어는 위 지점들에서 모두 무너진다. 따라서 방어의 실효 지점은 <strong>사람의 판단이 아니라 단말에 반드시 남는 흔적</strong>으로 이동해야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>방어가 무너지는 지점</th>
+<th>대신 관측해야 할 흔적</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>사용자의 문자 진위 판단</td>
+<td>발신번호 변작, 신규 생성 도메인, URL 단축 경유</td>
+</tr>
+<tr>
+<td>사용자의 설치 판단</td>
+<td>미확인 경로 설치, 기본 SMS 앱 변경, 과다 권한 요구</td>
+</tr>
+<tr>
+<td>사용자의 거래 인지</td>
+<td>인증문자 가로채기, 유심·기기 변경 직후 고액 거래</td>
+</tr>
+</tbody>
+</table>
+<p>범죄를 완벽히 막을 수는 없어도 <strong>흔적은 반드시 남는다.</strong> 이 흔적을 어떤 데이터로 관측하고 조합하는지는 이후 [공격 흐름]·[탐지 데이터] 장에서 다룬다.</p>
+<hr />
+<h2 id="_2">참고 자료</h2>
+<ul>
+<li>한국인터넷진흥원(KISA), 스미싱 탐지 통계 — 전자신문 「스미싱 피해, AI 이용한 악성 URL 탐지 기술로 예방」 (2025.6.2) <a href="https://www.etnews.com/20250602000358">🔗</a></li>
+<li>카카오뱅크, 「AI 스미싱 문자 확인」 2026년 상반기 분석 — 노컷뉴스 (2026.7.8) <a href="https://www.nocutnews.co.kr/news/6545267">🔗</a></li>
+<li>안랩, 「2026년 1분기 스미싱 위협 동향」 (2026.4) <a href="https://www.ahnlab.com/ko/contents/content-center/36134">🔗</a></li>
+<li>서울경찰청, 국내 최대 스미싱 조직 검거 — 연합뉴스 (2025.11.26) <a href="https://www.yna.co.kr/view/AKR20251126076000004">🔗</a></li>
+<li>이커머스 유출 연계 스미싱 — MBC 뉴스 (2025.12) <a href="https://imnews.imbc.com/news/2025/society/article/6785355_36718.html">🔗</a> · 서울신문 (2025.12.7) <a href="https://m.go.seoul.co.kr/news/society/2025/12/07/20251207500061">🔗</a></li>
+<li>KISA 보호나라, 유출 사고 연계형 스미싱 주의 공지 <a href="https://www.boho.or.kr/kr/bbs/view.do?bbsId=B0000133&amp;menuNo=205020&amp;nttId=71910">🔗</a> · 시의성 편승형 <a href="https://www.boho.or.kr/kr/bbs/view.do?bbsId=B0000133&amp;menuNo=205020&amp;nttId=72060">🔗</a> · 계정 탈취형 <a href="https://www.boho.or.kr/kr/bbs/view.do?bbsId=B0000133&amp;menuNo=205020&amp;nttId=72139">🔗</a></li>
+<li>이글루코퍼레이션, 「실제 사례로 살펴본 스미싱 공격기법」 <a href="https://www.igloo.co.kr/security-information/%EC%8B%A4%EC%A0%9C-%EC%82%AC%EB%A1%80%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B8-%EC%8A%A4%EB%AF%B8%EC%8B%B1smishing-%EA%B3%B5%EA%B2%A9%EA%B8%B0%EB%B2%95/">🔗</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../entry-01-voicephishing/" class="md-footer__link md-footer__link--prev" aria-label="이전: 보이스피싱">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                보이스피싱
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../entry-03-qshing/" class="md-footer__link md-footer__link--next" aria-label="다음: 큐싱">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                큐싱
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/Rakkk-s/mobile-security-fds-docs" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "toc.follow", "search.highlight", "search.suggest", "content.code.copy", "content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
