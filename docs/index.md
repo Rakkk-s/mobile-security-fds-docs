@@ -29,12 +29,12 @@
 
     [:octicons-arrow-right-24: 바로가기](./00-flow/entry-01-voicephishing.md)
 
--   :material-bug-outline: **2단계 · 악성 앱 주요 행위**
+-   :material-bug-outline: **2단계 · 금융 악성 행위 과정**
 
     ---
 
-    로더, 정보 탈취, 전화 가로채기, 원격제어 등
-    금융 악성 앱이 수행하는 주요 행위를 유형별로 분류하고 국내 사례와 함께 분석했습니다.
+    악성 앱이 설치되는 구조와 설치 이후 수행하는 주요 악성 기능을
+    유형별로 분류하고 국내 사례와 함께 분석했습니다.
 
     [:octicons-arrow-right-24: 바로가기](./01-threat/type-01-loader.md)
 
