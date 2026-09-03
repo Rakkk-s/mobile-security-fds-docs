@@ -108,4 +108,6 @@ flowchart LR
 - 금융감독원 금융사기대응단, 소비자경보 — 피싱사이트·악성앱·원격제어 결합 흐름 (2025.12) [🔗](https://www.fss.or.kr)
 - 금융감독원, 상품권 이용 신종 자금세탁형 보이스피싱 소비자경보 (2025.8.9) [🔗](https://www.fss.or.kr)
 - 금융위원회, 제2차 금융권 보이스피싱 근절 협의회 — 대포통장·가상자산 대응 (2025.8) [🔗](https://www.fsc.go.kr)
-- 각 유형별 세부 출처는 [보이스피싱](entry-01-voicephishing.md) · [스미싱](entry-02-smishing.md) · [큐싱](entry-03-qshing.md) · [악성 앱](entry-04-maliciousapp.md) 페이지 참조
+- 각 유형별 세부 출처는 [보이스피싱](entry-01-voicephishing.md) · [스미싱](entry-02-smishing.md) · [큐싱](entry-03-qshing.md) · [악성 앱](entry-04-maliciousapp.md) 페이지 참조- 각 유형별 세부 출처는 [보이스피싱](entry-01-voicephishing.md) · [스미싱](entry-02-smishing.md) · [큐싱](entry-03-qshing.md) · [악성 앱](entry-04-maliciousapp.md) 페이지 참조
+
+
