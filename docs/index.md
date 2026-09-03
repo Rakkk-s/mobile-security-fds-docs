@@ -47,16 +47,7 @@
 
     [:octicons-arrow-right-24: 바로가기](./02-scenario/scenario-01-card-smishing.md)
 
--   :material-database-search: **4단계 · 탐지 데이터**
-
-    ---
-
-    보안 모듈의 탐지 정보를 유형별로 정리하고,
-    공격 시나리오별 탐지 가능 데이터와 활용 방안을 분석했습니다.
-
-    [:octicons-arrow-right-24: 바로가기](./03-detection/api-01-deviceinfo.md)
-
--   :material-lan-connect: **5단계 · 보안 아키텍처**
+-   :material-lan-connect: **4단계 · 보안 아키텍처**
 
     ---
 
@@ -65,7 +56,7 @@
 
     [:octicons-arrow-right-24: 바로가기](./04-architecture/module-integration.md)
 
--   :material-shield-check: **6단계 · FDS 룰 설계**
+-   :material-shield-check: **5단계 · FDS 룰 설계**
 
     ---
 
