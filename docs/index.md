@@ -45,7 +45,7 @@
     분석한 위협 유형을 조합해
     실제 발생 가능한 공격을 단계별로 재구성했습니다.
 
-    [:octicons-arrow-right-24: 바로가기](./02-scenario/scenario-01-card-cancel.md)
+    [:octicons-arrow-right-24: 바로가기](./02-scenario/scenario-01-card-smishing.md)
 
 -   :material-database-search: **4단계 · 탐지 데이터**
 

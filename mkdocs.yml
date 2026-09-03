@@ -98,10 +98,10 @@ nav:
           - "통화·문자 제어형": 01-threat/type-04-callcontrol.md
           - "원격제어·화면감시형": 01-threat/type-05-remotecontrol.md
   - 공격 시나리오:
-      - "카드사 부정결제 취소": 02-scenario/scenario-01-card-cancel.md
-      - "기관 사칭 전화 가로채기": 02-scenario/scenario-02-forcecall.md
-      - "대출 사칭 원격제어": 02-scenario/scenario-03-remotecontrol.md
-      - "NFC 릴레이 결제": 02-scenario/scenario-04-nfc-relay.md
+      - "카드사 사칭 스미싱": 02-scenario/scenario-01-card-smishing.md
+      - "큐싱 기반 드로퍼": 02-scenario/scenario-02-qshing-dropper.md
+      - "NFC 릴레이 공격": 02-scenario/scenario-03-nfc-relay.md
+      - "대출 사칭 원격제어": 02-scenario/scenario-04-loan-remotecontrol.md
   - 탐지 데이터:
       - "단말수집정보 (deviceInfo)": 03-detection/api-01-deviceinfo.md
       - "악성코드 탐지정보 (antivirus)": 03-detection/api-02-antivirus.md

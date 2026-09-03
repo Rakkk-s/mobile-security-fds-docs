@@ -23,7 +23,7 @@ flowchart LR
 | ① 유입 | (작성 예정) | [주요 위협 분석](entry-01-voicephishing.md) |
 | ② 실행 | (작성 예정) | [악성 앱 주요 행위](../01-threat/type-01-loader.md) |
 | ③ 탈취·통제 | (작성 예정) | [악성 앱 주요 행위](../01-threat/type-01-loader.md) |
-| ④ 금전화 | (작성 예정) | [공격 시나리오](../02-scenario/scenario-01-card-cancel.md) |
+| ④ 금전화 | (작성 예정) | [공격 시나리오](../02-scenario/scenario-01-card-smishing.md) |
 
 ---
 
