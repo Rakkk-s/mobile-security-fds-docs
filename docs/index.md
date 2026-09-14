@@ -63,7 +63,7 @@
     복수 탐지 데이터를 조합한 시나리오별 탐지 룰을 설계하고,
     실제 사고 사례에 대입해 검증했습니다.
 
-    [:octicons-arrow-right-24: 바로가기](./05-fds-rule/principles.md)
+    [:octicons-arrow-right-24: 바로가기](./05-fds-rule/detection-device.md)
 
 </div>
 
