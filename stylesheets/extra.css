@@ -1,0 +1,97 @@
+/* TEAM Rak's — 문서 스타일 확장 */
+
+:root {
+  --md-primary-fg-color: #6C5CE7;
+  --md-primary-fg-color--light: #8C7DF0;
+  --md-primary-fg-color--dark: #4A3DBF;
+  --md-accent-fg-color: #6C5CE7;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #6C5CE7;
+  --md-accent-fg-color: #8C7DF0;
+}
+
+/* 표 가독성 */
+.md-typeset table:not([class]) th {
+  background-color: var(--md-default-fg-color--lightest);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.md-typeset table:not([class]) td {
+  vertical-align: top;
+}
+
+/* 제목 */
+.md-typeset h1,
+.md-typeset h2 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.md-typeset h2 {
+  margin-top: 2.2em;
+}
+
+/* 코드 블록 안의 흐름도(→ 나열) 가독성 */
+.md-typeset pre>code {
+  line-height: 1.7;
+}
+
+/* Mermaid 다이어그램 여백 */
+.md-typeset .mermaid {
+  margin: 1.5em 0;
+  text-align: center;
+}
+
+/* 헤더 로고 — 가로형 워드마크라 기본 높이보다 조금 키움 */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.6rem;
+  width: auto;
+}
+
+.md-nav__title .md-nav__button.md-logo img {
+  height: 1.6rem;
+  width: auto;
+}
+
+/* 다크 모드에서 본문 로고가 묻히지 않도록 */
+[data-md-color-scheme="slate"] .md-typeset img[src$="logo.png"] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* 한글 어절 단위 줄바꿈
+   브라우저 기본값은 한글을 글자 단위로 끊어 어절 중간에서 줄이 바뀐다.
+   keep-all로 어절을 유지하되, 긴 URL·패키지명은 break-word로 넘치지 않게 한다. */
+.md-typeset p,
+.md-typeset li,
+.md-typeset dd,
+.md-typeset dt,
+.md-typeset th,
+.md-typeset td,
+.md-typeset blockquote,
+.md-typeset .admonition,
+.md-typeset details,
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 코드·표 안의 긴 식별자는 어절이 없으므로 예외 처리 */
+.md-typeset code,
+.md-typeset pre {
+  word-break: break-all;
+}
+
+/* Mermaid 다이어그램은 위 규칙에서 제외한다.
+   다이어그램도 <pre> 안에 들어 있어 그대로 두면 노드 글자가 한 글자씩 끊긴다. */
+.md-typeset .mermaid,
+.md-typeset .mermaid * {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
