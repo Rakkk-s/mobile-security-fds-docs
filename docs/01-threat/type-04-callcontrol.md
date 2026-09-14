@@ -316,4 +316,3 @@ Operation BlackEcho의 `2차_call` 악성 앱이 통화·문자 기능을 전담
 - 헤럴드경제, 「악성 앱으로 휴대폰 장악·금융사 사칭…지난해 보이스피싱 피해 1.2조 '사상 최대'」, 2026.01.24 — 경찰청 자료 인용 보도 <https://biz.heraldcorp.com/article/10661923>
 - 파이오링크, 「안드로이드 뱅킹 악성코드(kb.apk) 분석보고서」, 2021.10.12 — <https://www.piolink.com/kr/service/Security-Analysis.php?bbsCode=security&vType=view&idx=78>
 - Android Developers, 「Build a default phone application」 — <https://developer.android.com/develop/connectivity/telecom/dialer-app>
-- 용어 정의는 [부록 · 용어 정리](../99-appendix/glossary.md) 참고

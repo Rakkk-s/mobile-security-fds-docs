@@ -231,4 +231,3 @@ flowchart TD
 - KISA 보호나라, 「휴대폰 소액결제 피해 등 사회적 이슈를 악용한 스미싱 주의」, 2025.09.07 — <https://www.boho.or.kr/kr/bbs/view.do?bbsId=B0000133&nttId=71862&menuNo=205021>
 - 금융보안원, 「금융 및 백신 앱으로 위장한 보이스피싱 악성 앱 프로파일링」(Operation BlackEcho), 2024.12 — <https://www.fsec.or.kr/bbs/detail?bbsNo=11611&menuNo=244>
 - 금융보안원, 「은행앱 위장 악성앱을 심층 분석한 인텔리전스 보고서 공개」 보도자료, 2025.01.23 — <https://www.fsec.or.kr/bbs/detail?menuNo=69&bbsNo=11621>
-- 용어 정의는 [부록 · 용어 정리](../99-appendix/glossary.md) 참고

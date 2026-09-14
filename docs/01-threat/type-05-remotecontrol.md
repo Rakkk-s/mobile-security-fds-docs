@@ -288,4 +288,3 @@ Operation BlackEcho에서는 `2차_main` 악성 앱이 **스트리밍·원격제
 - Cleafy, 「On-device fraud: a rising threat in online banking fraud」, 2024.04 — <https://www.cleafy.com/insights/on-device-fraud-a-rising-threat-in-online-banking-fraud>
 - ThreatFabric, 「New Android Malware Herodotus Mimics Human Behaviour to Evade Detection」, 2025.10 — <https://www.threatfabric.com/blogs/new-android-malware-herodotus-mimics-human-behaviour-to-evade-detection>
 - Zimperium zLabs, 「Rokarolla: Android Banker with Complete Device Takeover Capabilities」, 2026.06 — <https://zimperium.com/blog/rokarolla-android-banker-with-complete-device-takeover-capabilities>
-- 용어 정의는 [부록 · 용어 정리](../99-appendix/glossary.md) 참고

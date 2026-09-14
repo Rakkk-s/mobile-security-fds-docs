@@ -108,7 +108,8 @@ nav:
       - 탐지 데이터:
           - "단말 데이터": 05-fds-rule/detection-device.md
           - "금융 데이터": 05-fds-rule/detection-financial.md
-      - "룰 정의서": 05-fds-rule/rule-catalog.md
+      - 룰 설계:
+          - "룰 정의서": 05-fds-rule/rule-catalog.md
       - 시나리오 ↔ 룰 매핑:
           - "카드사 사칭 스미싱": 05-fds-rule/mapping-01-card-smishing.md
           - "큐싱 기반 드로퍼": 05-fds-rule/mapping-02-qshing-dropper.md

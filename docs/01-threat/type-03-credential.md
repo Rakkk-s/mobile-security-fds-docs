@@ -266,4 +266,3 @@ Operation BlackEcho의 2차 악성 앱은 공격자 명령을 받으면 **범죄
 - 데일리시큐, 「217개 금융앱 노린 안드로이드 악성코드 '로카롤라' 등장」 — <https://www.dailysecu.com/news/articleView.html?idxno=207194>
 - Google Play, 「Use of the AccessibilityService API」 — <https://support.google.com/googleplay/android-developer/answer/10964491>
 - Android Developers, 「Protect against fraud」 — <https://developer.android.com/security/fraud-prevention>
-- 용어 정의는 [부록 · 용어 정리](../99-appendix/glossary.md) 참고
