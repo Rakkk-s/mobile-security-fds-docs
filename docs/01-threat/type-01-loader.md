@@ -233,4 +233,4 @@ flowchart TD
 - 금융보안원, 「금융 및 백신 앱으로 위장한 보이스피싱 악성 앱 프로파일링」(FSI Intelligence Report · Operation BlackEcho), 2024.12 — <https://www.fsec.or.kr/bbs/detail?bbsNo=11611&menuNo=244>
 - Rise of Dropper Malware: Android Bypass of Play Protect (2026) — <https://rehutalwar.com/blog/rise-of-dropper-malware-android-bypass-play-protect-2026>
 - 시큐리온 블로그 · 드로퍼 악성코드 분석 — <https://blog.securion.co.kr/blog/post_dropper/>
-- 용어 정의는 [부록 · 용어 정리](../99-appendix/glossary.md) 참고
+
